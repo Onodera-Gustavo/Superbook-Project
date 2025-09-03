@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Heróis{% endblock %}
+
+{% block content %}
+<h1>Heróis cadastrados</h1>
+<ul>
+    {% for hero in herois %}
+        <li>{{ hero.codinome }} - {{ hero.poder_principal }}</li>
+    {% empty %}
+        <li>Nenhum herói encontrado.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

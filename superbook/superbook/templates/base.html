@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}SuperBook{% endblock %}</title>
+</head>
+<body>
+    {% include "partials/menu.html" %}
+    
+    <main>
+        {% block content %}
+        <h1>Bem-vindo ao SuperBook</h1>
+        <p>Seu lugar para gerenciar heróis e posts.</p>
+        {% endblock %}
+    </main>
+</body>
+</html>
