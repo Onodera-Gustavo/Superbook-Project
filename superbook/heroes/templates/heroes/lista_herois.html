@@ -1,14 +1,28 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block title %}Lista de Heróis{% endblock %}
 
 {% block content %}
-<h1>Heróis cadastrados</h1>
-<ul>
-    {% for hero in herois %}
-        <li>{{ hero.codinome }} - {{ hero.poder_principal }}</li>
-    {% empty %}
-        <li>Nenhum herói encontrado.</li>
-    {% endfor %}
-</ul>
+<h2 class="mb-4">Heróis cadastrados</h2>
+
+<div class="row">
+{% for hero in herois %}
+  <div class="col-md-4">
+    <div class="card mb-3 shadow-sm border border-dark" >
+  <div class="card-body">
+    <h5 class="card-title fw-bold">{{ hero.codinome }}</h5>
+    <p class="card-text">{{ hero.poder_principal }}</p>
+    <small class="text-muted">{{ hero.cidade }}</small>
+    {% if hero.cidade == "Nova York" %}
+      <p class="mt-2 text-primary"><em>Este herói protege Nova York!</em></p>
+    {% endif %}
+  </div>
+</div>
+
+    </div>
+  </div>
+{% empty %}
+  <p>Nenhum herói encontrado.</p>
+{% endfor %}
+</div>
 {% endblock %}
