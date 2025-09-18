@@ -1,28 +1,32 @@
 {% extends 'base.html' %}
+{% load widget_tweaks %}
 
-{% block title %}Lista de Heróis{% endblock %}
+
+{% block title %}Heróis Cadastrados{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Heróis cadastrados</h2>
-
-<div class="row">
-{% for hero in herois %}
-  <div class="col-md-4">
-    <div class="card mb-3 shadow-sm border border-dark" >
-  <div class="card-body">
-    <h5 class="card-title fw-bold">{{ hero.codinome }}</h5>
-    <p class="card-text">{{ hero.poder_principal }}</p>
-    <small class="text-muted">{{ hero.cidade }}</small>
-    {% if hero.cidade == "Nova York" %}
-      <p class="mt-2 text-primary"><em>Este herói protege Nova York!</em></p>
-    {% endif %}
-  </div>
-</div>
-
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Heróis Cadastrados</h2>
+        <a href="{% url 'criar_heroi' %}" class="btn btn-primary">Cadastrar Novo Herói</a>
     </div>
-  </div>
-{% empty %}
-  <p>Nenhum herói encontrado.</p>
-{% endfor %}
+
+    <div class="row">
+        {% for heroi in herois %}
+        <div class="col-md-4 mb-3">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ heroi.codinome }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ heroi.nome_real }}</h6>
+                    <p class="card-text"><strong>Poder:</strong> {{ heroi.poder_principal }}</p>
+                    <p class="card-text"><strong>Cidade:</strong> {{ heroi.cidade }}</p>
+                    <p class="card-text">{{ heroi.historia|truncatewords:20 }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>Nenhum herói cadastrado ainda.</p>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

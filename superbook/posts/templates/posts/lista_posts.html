@@ -3,18 +3,24 @@
 {% block title %}Lista de Posts{% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Posts cadastrados</h2>
-
-<ul class="list-group">
-{% for post in posts %}
-  <div class="card mb-3 shadow-sm">
-  <div class="card-body">
-    <p class="fs-5 fw-semibold text-dark">{{ post.mensagem }}</p>
-    <small class="text-muted">Por: {{ post.autor }} — {{ post.criado_em|date:"d/m/Y H:i" }}</small>
-  </div>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Posts</h2>
+  <a href="{% url 'criar_post' %}" class="btn btn-primary">Novo Post</a>
 </div>
-{% empty %}
-  <li class="list-group-item">Nenhum post encontrado.</li>
-{% endfor %}
-</ul>
+
+<div class="row">
+  {% for post in posts %}
+    <div class="col-md-4">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ post.autor.codinome }}</h5>
+          <p class="card-text">{{ post.mensagem }}</p>
+          <small class="text-muted">Criado em {{ post.criado_em|date:"d/m/Y H:i" }}</small>
+        </div>
+      </div>
+    </div>
+  {% empty %}
+    <p>Nenhum post encontrado.</p>
+  {% endfor %}
+</div>
 {% endblock %}
