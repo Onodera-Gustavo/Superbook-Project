@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-r(xudv7km1eeq%&73lnl!l!_aaa8v4=62peia3lk98jng0+nc8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['onoderagustavo@gmail.com']
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # Apps do SuperBook
     'heroes',
     'posts',
+    "villains", 
 ]
 
 MIDDLEWARE = [
