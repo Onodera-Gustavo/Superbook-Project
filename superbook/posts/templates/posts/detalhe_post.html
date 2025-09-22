@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Post de {{ post.autor.codinome }}{% endblock %}
+{% block content %}
+<div class="container mt-4">
+  <div class="card mb-3 border border-dark" style="border-radius:0;">
+    <div class="card-body">
+      <h5 class="card-title">{{ post.autor.codinome }}</h5>
+      <p class="card-text">{{ post.mensagem|linebreaksbr }}</p>
+      <small class="text-muted">{{ post.criado_em|date:"d/m/Y H:i" }}</small>
+    </div>
+  </div>
+
+  <h4>Comentários</h4>
+  <div class="mb-4">
+    {% for comentario in comentarios %}
+      <div class="card mb-2">
+        <div class="card-body">
+          <p class="mb-1">{{ comentario.conteudo }}</p>
+          <small class="text-muted">Por: {{ comentario.autor.codinome }} — {{ comentario.criado_em|date:"d/m/Y H:i" }}</small>
+        </div>
+      </div>
+    {% empty %}
+      <p>Seja o primeiro a comentar.</p>
+    {% endfor %}
+  </div>
+
+  <h5>Adicionar comentário</h5>
+  <form method="post" class="card p-3">
+    {% csrf_token %}
+    {% load widget_tweaks %}
+    {% for field in form %}
+      <div class="mb-2">
+        {{ field.label_tag }}
+        {{ field|add_class:"form-control" }}
+        {% if field.errors %}
+          <div class="text-danger">
+            {% for err in field.errors %}{{ err }}<br>{% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-primary">Comentar</button>
+      <a href="{% url 'posts:lista_posts' %}" class="btn btn-secondary">Voltar</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
